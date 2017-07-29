@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 #include "aes.h"
 
 #define Nb (4)
@@ -187,7 +186,7 @@ const size_t aes_calclength(const char *out, size_t length) {
     return length - quot;
 }
 
-void aes_ecbenc(const int bits, const char * in, const size_t length, const char* key, char * out) {
+void aes_ecbenc(const int bits, const char *in, const size_t length, const char *key, char *out) {
     char blk[16];
     for (size_t d = 0; d + 15 < length; d += 16) {
         aes_cipher(bits, in + d, key, out + d);
@@ -196,7 +195,7 @@ void aes_ecbenc(const int bits, const char * in, const size_t length, const char
     aes_cipher(bits, blk, key, out + length - quot);
 }
 
-size_t aes_ecbdec(const int bits, const char * in, const size_t length, const char* key, char * out) {
+size_t aes_ecbdec(const int bits, const char *in, const size_t length, const char *key, char *out) {
     for (size_t d = 0; d + 15 < length; d += 16) {
         aes_invcipher(bits, in + d, key, out + d);
     }
